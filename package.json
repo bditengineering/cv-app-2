@@ -7,6 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@supabase/auth-helpers-nextjs": "latest",
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.14",
@@ -14,6 +15,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "formik": "^2.4.3",
+    "lucide-react": "^0.274.0",
     "next": "13.4.9",
     "postcss": "8.4.24",
     "react": "18.2.0",

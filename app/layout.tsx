@@ -1,4 +1,7 @@
+import NavBar from "@/components/Navbar";
+import Container from "@/components/ui/container";
 import "@/styles/globals.css";
+import { usePathname } from "next/navigation";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className="min-h-screen bg-background flex flex-col items-center">
+        <main className="min-h-screen flex flex-col items-center">
           {children}
         </main>
       </body>

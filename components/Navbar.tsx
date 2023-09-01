@@ -1,0 +1,87 @@
+"use client";
+
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { cx } from "class-variance-authority";
+import Button, { buttonVariants } from "@/ui/button";
+import Container from "@/ui/container";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Plus, User2 } from "lucide-react";
+
+interface NavBarProps {
+  title?: string;
+}
+
+export default function NavBar({ title }: NavBarProps) {
+  const supabase = createClientComponentClient();
+  const router = useRouter();
+
+  async function signOut() {
+    await supabase.auth.signOut();
+    await router.push("/");
+  }
+
+  return (
+    <Disclosure as="nav" className="w-full border-b border-b-gray-200">
+      <Container className="flex h-16 items-center justify-between">
+        <div className="text-gray-600">
+          <Link
+            href="/"
+            className="px-2 font-serif text-2xl leading-none text-gray-900 hover:underline"
+          >
+            cv
+          </Link>
+
+          {title && (
+            <>
+              <span className="w-4">/</span>
+              <span className="px-2">{title}</span>
+            </>
+          )}
+        </div>
+
+        <div className="ml-4 flex items-center md:ml-6">
+          <Link
+            className={buttonVariants({ variant: "tinted", size: "small" })}
+            prefetch={false}
+            href="/new"
+          >
+            <Plus className="h-5 w-5" /> Add new CV
+          </Link>
+
+          {/* Profile dropdown */}
+          <Menu as="div" className="relative ml-3">
+            <Menu.Button className="relative h-9 w-9 overflow-hidden rounded-full border-[0.5px] border-gray-200 bg-gray-100 text-gray-300 transition-colors duration-500 hover:text-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-100">
+              <User2 className="absolute inset-0 m-auto h-8 w-8 translate-y-1.5" />
+            </Menu.Button>
+
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Item
+                  as={Button}
+                  className={({ active: focused }) =>
+                    cx(["w-full !rounded-none", focused ? "bg-gray-50" : ""])
+                  }
+                  onClick={signOut}
+                  variant="plain"
+                >
+                  Sign out
+                </Menu.Item>
+              </Menu.Items>
+            </Transition>
+          </Menu>
+        </div>
+      </Container>
+    </Disclosure>
+  );
+}
