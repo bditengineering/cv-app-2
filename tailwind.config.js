@@ -10,10 +10,8 @@ module.exports = {
           background: "hsl(var(--btn-background))",
           "background-hover": "hsl(var(--btn-background-hover))",
         },
-        colors: {
-          "primary-light": "var(--primary-light)",
-          "primary-dark": "var(--primary-dark)",
-        },
+        "primary-light": "var(--primary-light)",
+        "primary-dark": "var(--primary-dark)",
       },
     },
   },
