@@ -2,21 +2,6 @@ import React, { useRef } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-export interface PrefixSuffixRenderProps {
-  disabled?: boolean;
-}
-
-interface InputProps
-  extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
-  fullWidth?: boolean;
-  helperText?: React.ReactElement;
-  renderPrefix?: ({ disabled }: PrefixSuffixRenderProps) => React.ReactElement;
-  renderSuffix?: ({ disabled }: PrefixSuffixRenderProps) => React.ReactElement;
-}
-
 const inputContainerClasses = cva("relative rounded-md", {
   variants: {
     fullWidth: {
@@ -38,10 +23,10 @@ const inputContainerClasses = cva("relative rounded-md", {
   },
 });
 
-export const inputClasses = cva(
+export const inputVariants = cva(
   [
-    "block w-full rounded-md border border-gray-300 py-2 shadow-sm bg-transparent placeholder:text-gray-500",
-    "focus:border-indigo-300 focus:outline-0 focus:ring-4 focus:ring-indigo-100 focus:ring-offset-0",
+    "block w-full rounded-md border border-gray-300 p-2 h-9 shadow-sm bg-transparent placeholder:text-gray-500",
+    "focus:border-sky-300 focus:outline-0 focus:ring-4 focus:ring-sky-100 focus:ring-offset-0",
   ],
   {
     variants: {
@@ -58,6 +43,21 @@ export const inputClasses = cva(
     },
   }
 );
+
+export interface PrefixSuffixRenderProps {
+  disabled?: boolean;
+}
+
+interface InputProps
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  fullWidth?: boolean;
+  helperText?: React.ReactElement;
+  renderPrefix?: ({ disabled }: PrefixSuffixRenderProps) => React.ReactElement;
+  renderSuffix?: ({ disabled }: PrefixSuffixRenderProps) => React.ReactElement;
+}
 
 function getElementWidth<RefType extends HTMLElement | null>(
   elementRef: React.MutableRefObject<RefType>
@@ -141,7 +141,7 @@ const Input = React.forwardRef(
             name={name}
             id={id}
             disabled={disabled}
-            className={inputClasses({
+            className={inputVariants({
               hasPrefix: prefixPresent,
               hasSuffix: suffixPresent,
             })}
