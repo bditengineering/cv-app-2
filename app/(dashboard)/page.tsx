@@ -8,9 +8,6 @@ export const dynamic = "force-dynamic";
 const Home = async () => {
   const supabase = createServerComponentClient<Database>({ cookies });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
   const { data } = await supabase
     .from("cv")
     // should this be user: users!updated_by(*) ?
