@@ -9,6 +9,9 @@ const Home = async () => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const { data } = await supabase
+    .from("cv")
+    .select("*, titles(*), user: users!updated_by(*)");
 
   return <div>Home, {user?.email}</div>;
 };

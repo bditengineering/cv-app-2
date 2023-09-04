@@ -7,20 +7,19 @@ import { useRouter } from "next/navigation";
 import { cx } from "class-variance-authority";
 import Button, { buttonVariants } from "@/ui/button";
 import Container from "@/ui/container";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Plus, User2 } from "lucide-react";
+import axios from "axios";
 
 interface NavBarProps {
   title?: string;
 }
 
 export default function NavBar({ title }: NavBarProps) {
-  const supabase = createClientComponentClient();
   const router = useRouter();
 
   async function signOut() {
-    await supabase.auth.signOut();
-    await router.push("/");
+    await axios.post("/auth/sign-out");
+    await router.push("/signin");
   }
 
   return (
