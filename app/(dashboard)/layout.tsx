@@ -1,7 +1,6 @@
 import NavBar from "@/components/Navbar";
 import Container from "@/components/ui/container";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createServerComponentClient } from "@/lib/supabase-server";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
@@ -12,7 +11,7 @@ interface LayoutProps {
 }
 
 const Layout = async ({ children }: LayoutProps) => {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = createServerComponentClient();
 
   const {
     data: { session },

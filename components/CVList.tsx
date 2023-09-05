@@ -1,8 +1,7 @@
 "use client";
 
 import { CVsWithTitlesAndUser } from "@/types";
-import { Database } from "@/types/database.types";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClientComponentClient } from "@/lib/supabase-client";
 import {
   Table,
   TableContainer,
@@ -16,7 +15,7 @@ interface CVListProps {
 }
 
 const CVList = ({ cvs }: CVListProps) => {
-  const supabase = createClientComponentClient<Database>();
+  const supabase = createClientComponentClient();
 
   async function downloadPdf(fileName: string) {
     const { data, error } = await supabase.storage
@@ -78,7 +77,7 @@ const CVList = ({ cvs }: CVListProps) => {
                     className="text-base font-semibold leading-normal text-gray-600"
                     type="button"
                     onClick={() =>
-                      downloadPdf(`${cv.first_name} - ${cv?.titles?.name}`)
+                      downloadPdf(`BDIT_${cv.first_name}_${cv?.titles?.name}`)
                     }
                   >
                     Download
