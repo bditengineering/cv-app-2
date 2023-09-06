@@ -1,6 +1,6 @@
 "use client";
 
-import { CVsWithTitlesAndUser } from "@/types";
+import { CVWithTitlesAndUser } from "@/types";
 import { createClientComponentClient } from "@/lib/supabase-client";
 import {
   Table,
@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 
 interface CVListProps {
-  cvs: CVsWithTitlesAndUser[] | null;
+  cvs: CVWithTitlesAndUser[] | null;
 }
 
 const CVList = ({ cvs }: CVListProps) => {

@@ -3,24 +3,27 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cx } from "class-variance-authority";
 import Button, { buttonVariants } from "@/ui/button";
 import Container from "@/ui/container";
 import { Plus, User2 } from "lucide-react";
 import axios from "axios";
 
-interface NavBarProps {
-  title?: string;
-}
+const TITLE_PATHS = {
+  "/new": "Add New CV",
+} as const;
 
-export default function NavBar({ title }: NavBarProps) {
+export default function NavBar() {
   const router = useRouter();
+  const pathname = usePathname() as keyof typeof TITLE_PATHS;
 
   async function signOut() {
     await axios.post("/auth/sign-out");
     await router.push("/signin");
   }
+
+  const title = TITLE_PATHS[pathname];
 
   return (
     <Disclosure as="nav" className="w-full border-b border-b-gray-200">

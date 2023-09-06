@@ -1,7 +1,4 @@
-import NavBar from "@/components/Navbar";
-import Container from "@/components/ui/container";
 import "@/styles/globals.css";
-import { usePathname } from "next/navigation";
 
 export const metadata = {
   title: "Create Next App",
