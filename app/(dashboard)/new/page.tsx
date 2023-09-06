@@ -1,4 +1,5 @@
 import CVForm from "@/components/CVForm";
+import { transformSkills } from "@/helpers";
 import { createServerComponentClient } from "@/lib/supabase-server";
 
 async function fetchTitles() {
@@ -8,9 +9,22 @@ async function fetchTitles() {
   return data;
 }
 
+async function fetchSkills() {
+  const supabase = createServerComponentClient();
+
+  const { data } = await supabase
+    .from("skill")
+    .select("id, name, skill_group(id, name, order)")
+    .order("name");
+
+  return data;
+}
+
 const NewCvPage = async () => {
   const titles = await fetchTitles();
-  return <CVForm titles={titles || []} />;
+  const skills = await fetchSkills();
+
+  return <CVForm titles={titles || []} skills={transformSkills(skills)} />;
 };
 
 export default NewCvPage;

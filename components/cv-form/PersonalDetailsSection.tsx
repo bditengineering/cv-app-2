@@ -1,9 +1,11 @@
+"use client";
+
 import Input, { inputVariants } from "@/ui/input";
 import { ErrorMessage, Field } from "formik";
-import { UserTitle } from "@/types";
+import { TitlesResponse } from "@/types";
 
 interface PersonalDetailsSectionProps {
-  titles: UserTitle[];
+  titles: TitlesResponse[];
 }
 
 const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {

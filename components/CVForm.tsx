@@ -1,10 +1,11 @@
 "use client";
 
-import { CVDetails, UserTitle } from "@/types";
+import { CVDetails, TitlesResponse, OrderedSkillGroup } from "@/types";
 import { Form, Formik } from "formik";
 import PersonalDetailsSection from "@/components/cv-form/PersonalDetailsSection";
 import Button from "@/ui/button";
 import * as Yup from "yup";
+import TechnicalSkillsSection from "./cv-form/TechnicalSkillsSection";
 
 const CVFormValidationShema = Yup.object({
   first_name: Yup.string().required("First name is required"),
@@ -44,10 +45,11 @@ const CVFormValidationShema = Yup.object({
 });
 
 interface CVFormProps {
-  titles: UserTitle[];
+  titles: TitlesResponse[];
+  skills: OrderedSkillGroup;
 }
 
-const CVForm = ({ titles }: CVFormProps) => {
+const CVForm = ({ titles, skills }: CVFormProps) => {
   const initialValues: CVDetails = {
     first_name: "",
     last_name: "",
@@ -75,7 +77,15 @@ const CVForm = ({ titles }: CVFormProps) => {
       <Form>
         <div className="body-font rounded-md border-2 border-gray-200 text-gray-600 dark:border-gray-700">
           <div className="container mx-auto px-16 py-6">
+            <h2 className="my-10 text-2xl font-bold text-primary-light italic">
+              Personal Details
+            </h2>
             <PersonalDetailsSection titles={titles} />
+
+            <h2 className="my-10 text-2xl font-bold text-primary-light italic">
+              Technical skills
+            </h2>
+            <TechnicalSkillsSection skills={skills} />
 
             <Button type="submit" className="w-full justify-center mt-4">
               Submit
