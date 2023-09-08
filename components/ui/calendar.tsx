@@ -26,7 +26,7 @@ function Calendar({
         caption_label: "hidden",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
-          buttonVariants({ variant: "ghost" }),
+          buttonVariants({ variant: "plain" }),
           "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
         ),
         nav_button_previous: "absolute left-1",

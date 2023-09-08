@@ -21,8 +21,6 @@ interface ProjectsSectionProps {}
 const ProjectsSection = ({}: ProjectsSectionProps) => {
   const { values } = useFormikContext<CVDetails>();
 
-  console.log(values);
-
   const renderProjects = values.projects.map((project, index) => (
     <div className="mt-6" key={project.id}>
       <h4 className="text-sky-500 mb-5">Project #{index + 1}</h4>
