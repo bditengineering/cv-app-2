@@ -81,7 +81,7 @@ const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {
           <Field
             name="summary"
             component="textarea"
-            rows={3}
+            rows={2}
             className={inputVariants({ className: "h-full" })}
           />
           <ErrorMessage

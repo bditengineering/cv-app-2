@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
@@ -25,8 +27,8 @@ export const buttonVariants = cva(
           "disabled:hover:bg-white disabled:hover:text-gray-700",
         ],
         plain: [
-          "text-gray-600 focus:bg-gray-50 hover:text-gray-700",
-          "hover:bg-gray-50 hover:text-gray-700",
+          "text-gray-600 focus:bg-gray-50 focus:text-sky-700",
+          "hover:bg-sky-50 hover:text-sky-700",
           "disabled:hover:bg-transparent disabled:hover:text-gray-600",
         ],
       },

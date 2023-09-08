@@ -1,6 +1,12 @@
+"use client";
+
 import React, { useRef } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+
+export interface PrefixSuffixRenderProps {
+  disabled?: boolean;
+}
 
 const inputContainerClasses = cva("relative rounded-md", {
   variants: {
