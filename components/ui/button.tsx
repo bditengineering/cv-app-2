@@ -3,6 +3,7 @@
 import React from "react";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 export const buttonVariants = cva(
   "button rounded-lg flex items-center gap-x-2 font-semibold transition-colors focus:outline-none",
@@ -64,6 +65,7 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
+  isLoading?: boolean;
 }
 
 const Button = React.forwardRef(
@@ -79,6 +81,7 @@ const Button = React.forwardRef(
       suffix,
       type = "button",
       variant,
+      isLoading = false,
     }: ButtonProps,
     ref: React.Ref<HTMLButtonElement>
   ) => {
@@ -99,7 +102,11 @@ const Button = React.forwardRef(
         ref={ref}
       >
         {prefix}
-        {children}
+        {isLoading ? (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          children
+        )}
         {suffix}
       </button>
     );

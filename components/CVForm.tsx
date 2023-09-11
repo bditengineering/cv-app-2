@@ -7,6 +7,7 @@ import Button from "@/ui/button";
 import * as Yup from "yup";
 import TechnicalSkillsSection from "./cv-form/TechnicalSkillsSection";
 import ProjectsSection from "./cv-form/ProjectsSection";
+import EducationsSection from "./cv-form/EducationsSection";
 
 // const CVFormValidationShema = Yup.object({
 //   first_name: Yup.string().required("First name is required"),
@@ -92,6 +93,11 @@ const CVForm = ({ titles, skills }: CVFormProps) => {
               Projects
             </h2>
             <ProjectsSection />
+
+            <h2 className="mb-2 mt-6 text-2xl font-bold text-primary-light italic">
+              Education
+            </h2>
+            <EducationsSection />
 
             <Button type="submit" className="w-full justify-center mt-4">
               Submit

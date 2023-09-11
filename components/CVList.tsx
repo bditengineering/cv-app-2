@@ -84,7 +84,7 @@ const CVList = ({ cvs }: CVListProps) => {
                   </button>
 
                   <Link
-                    className="text-base font-semibold leading-normal text-indigo-700 hover:text-indigo-800"
+                    className="text-base font-semibold leading-normal text-primary-light hover:text-sky-800"
                     prefetch={false}
                     href={`/edit/${cv.id}`}
                   >
