@@ -28,7 +28,7 @@ export default function DatePicker({ setField }: DatePickerProps) {
           variant="outlined"
           className={cn(
             inputVariants(),
-            "flex flex-row justify-start text-left font-normal hover:bg-slate-200"
+            "flex flex-row justify-start text-left font-normal hover:bg-slate-100"
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />

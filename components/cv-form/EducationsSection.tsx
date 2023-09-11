@@ -149,9 +149,10 @@ const EducationsSection = ({}: EducationsSectionProps) => {
         <>
           {renderEducations(remove)}
           <Button
-            variant="plain"
+            variant="outlined"
             type="button"
             onClick={() => push({ university_name: "", degree: "" })}
+            className="hover:text-primary-light"
           >
             <PlusCircle />
             <span>Add Education</span>

@@ -10,7 +10,7 @@ import {
   type FieldProps,
 } from "formik";
 import Button from "@/ui/button";
-import { PlusCircle, Trash2 } from "lucide-react";
+import { PlusSquare, PlusCircle, Plus, Trash2 } from "lucide-react";
 import Input, { PrefixSuffixRenderProps, inputVariants } from "@/ui/input";
 import DatePicker from "@/components/DatePicker";
 import { setDate } from "date-fns";
@@ -225,9 +225,9 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
                     type="button"
                     variant="plain"
                     onClick={() => push("")}
-                    className="mt-2"
+                    className="mt-2 text-primary-light"
                   >
-                    <PlusCircle />
+                    <Plus />
                     <span>Add Technology</span>
                   </Button>
                   <ErrorMessage
@@ -277,9 +277,9 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
                     type="button"
                     variant="plain"
                     onClick={() => push("")}
-                    className="mt-2"
+                    className="mt-2 text-primary-light"
                   >
-                    <PlusCircle />
+                    <Plus />
                     <span>Add Responsibility</span>
                   </Button>
                   <ErrorMessage
@@ -303,7 +303,7 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
         <>
           {renderProjects(remove)}
           <Button
-            variant="plain"
+            variant="outlined"
             type="button"
             onClick={() =>
               push({
@@ -317,6 +317,7 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
                 ongoing: false,
               })
             }
+            className="hover:text-primary-light"
           >
             <PlusCircle />
             <span>Add Project</span>
