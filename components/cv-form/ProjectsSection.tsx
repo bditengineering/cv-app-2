@@ -1,20 +1,20 @@
 "use client";
 
+import RemoveInputAction from "@/components//RemoveInputAction";
+import DatePicker from "@/components/DatePicker";
 import { CVDetails } from "@/types";
+import Button from "@/ui/button";
+import Input, { PrefixSuffixRenderProps, inputVariants } from "@/ui/input";
+import { setDate } from "date-fns";
 import {
-  FieldArray,
-  type ArrayHelpers,
-  useFormikContext,
-  Field,
   ErrorMessage,
+  Field,
+  FieldArray,
+  useFormikContext,
+  type ArrayHelpers,
   type FieldProps,
 } from "formik";
-import Button from "@/ui/button";
-import { PlusSquare, PlusCircle, Plus, Trash2 } from "lucide-react";
-import Input, { PrefixSuffixRenderProps, inputVariants } from "@/ui/input";
-import DatePicker from "@/components/DatePicker";
-import { setDate } from "date-fns";
-import RemoveInputAction from "@/components//RemoveInputAction";
+import { Plus, PlusCircle, Trash2 } from "lucide-react";
 
 interface ProjectsSectionProps {}
 
@@ -22,8 +22,8 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
   const { values } = useFormikContext<CVDetails>();
 
   const renderProjects = (remove: <X = any>(index: number) => X | undefined) =>
-    values.projects.map((project, index) => (
-      <div className="mt-6" key={project.id}>
+    values.projects.map((_project, index) => (
+      <div className="mt-6" key={`project-${index}`}>
         <div className="flex justify-between">
           <h4 className="text-sky-500 mb-5">Project #{index + 1}</h4>
           <Button
@@ -200,9 +200,9 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
                 <div>
                   <div>
                     {values.projects[index].technologies?.map(
-                      (tech, techIndex) => (
+                      (_tech, techIndex) => (
                         <Field
-                          key={tech}
+                          key={`tech-${techIndex}`}
                           as={Input}
                           autoFocus
                           fullWidth
@@ -216,6 +216,7 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
                               onClick={() => remove(techIndex)}
                             />
                           )}
+                          placeholder={`Technology #${techIndex + 1}`}
                         />
                       )
                     )}
@@ -252,22 +253,23 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
                 <div>
                   <div>
                     {values.projects[index].responsibilities?.map(
-                      (tech, techIndex) => (
+                      (_responsibility, rIndex) => (
                         <Field
-                          key={tech}
+                          key={`responsibility-${rIndex}`}
                           as={Input}
                           autoFocus
                           fullWidth
-                          name={`[projects][${index}][responsibilities].${techIndex}`}
+                          name={`[projects][${index}][responsibilities].${rIndex}`}
                           className="my-2"
                           renderSuffix={({
                             disabled,
                           }: PrefixSuffixRenderProps) => (
                             <RemoveInputAction
                               disabled={disabled}
-                              onClick={() => remove(techIndex)}
+                              onClick={() => remove(rIndex)}
                             />
                           )}
+                          placeholder={`Responsibility #${rIndex + 1}`}
                         />
                       )
                     )}

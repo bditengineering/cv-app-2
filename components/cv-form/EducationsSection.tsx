@@ -1,15 +1,15 @@
+import { yearsOptions } from "@/constants";
+import { CVDetails } from "@/types";
+import Button from "@/ui/button";
+import Input, { inputVariants } from "@/ui/input";
 import {
-  type ArrayHelpers,
+  ErrorMessage,
+  Field,
   FieldArray,
   useFormikContext,
-  Field,
-  ErrorMessage,
+  type ArrayHelpers,
 } from "formik";
-import Button from "@/ui/button";
 import { PlusCircle, Trash2 } from "lucide-react";
-import { CVDetails } from "@/types";
-import Input, { inputVariants } from "@/ui/input";
-import { yearsOptions } from "@/constants";
 
 interface EducationsSectionProps {}
 
@@ -19,8 +19,8 @@ const EducationsSection = ({}: EducationsSectionProps) => {
   const renderEducations = (
     remove: <X = any>(index: number) => X | undefined
   ) =>
-    values.educations.map((education, index) => (
-      <div className="mt-6" key={education.id}>
+    values.educations.map((_education, index) => (
+      <div className="mt-6" key={`education-${index}`}>
         <div className="flex justify-between">
           <h4 className="text-sky-500 mb-5">Education #{index + 1}</h4>
           <Button
@@ -70,11 +70,11 @@ const EducationsSection = ({}: EducationsSectionProps) => {
                 as="select"
                 className={inputVariants()}
               >
-                <option disabled selected value="">
+                <option disabled value="">
                   -- Select start year --
                 </option>
                 {yearsOptions.map((year) => (
-                  <option value={year} key={year}>
+                  <option value={year + 2} key={year}>
                     {year}
                   </option>
                 ))}
@@ -100,7 +100,7 @@ const EducationsSection = ({}: EducationsSectionProps) => {
                 as="select"
                 className={inputVariants()}
               >
-                <option disabled selected>
+                <option disabled value="">
                   -- Select end year --
                 </option>
                 {yearsOptions.map((year) => (
@@ -151,7 +151,14 @@ const EducationsSection = ({}: EducationsSectionProps) => {
           <Button
             variant="outlined"
             type="button"
-            onClick={() => push({ university_name: "", degree: "" })}
+            onClick={() =>
+              push({
+                university_name: "",
+                degree: "",
+                start_year: "",
+                end_year: "",
+              })
+            }
             className="hover:text-primary-light"
           >
             <PlusCircle />

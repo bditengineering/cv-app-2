@@ -10,7 +10,7 @@ interface PersonalDetailsSectionProps {
 
 const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {
   return (
-    <div className="divide-y-2 divide-gray-100 dark:divide-gray-700">
+    <>
       <div className="flex flex-wrap py-4 md:flex-nowrap">
         <div className="flex flex-shrink-0 flex-col md:mb-0 md:w-64">
           <span className="title-font font-semibold text-gray-700 dark:text-gray-400">
@@ -52,7 +52,7 @@ const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {
                 component="select"
               >
                 <option disabled value="">
-                  Choose title
+                  -- Select title --
                 </option>
 
                 {titles.map((option, index: number) => (
@@ -91,7 +91,7 @@ const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

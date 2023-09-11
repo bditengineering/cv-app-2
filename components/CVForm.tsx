@@ -5,10 +5,12 @@ import { Form, Formik } from "formik";
 import PersonalDetailsSection from "@/components/cv-form/PersonalDetailsSection";
 import Button from "@/ui/button";
 import * as Yup from "yup";
-import TechnicalSkillsSection from "./cv-form/TechnicalSkillsSection";
-import ProjectsSection from "./cv-form/ProjectsSection";
-import EducationsSection from "./cv-form/EducationsSection";
-import LevelOfEnglishSection from "./cv-form/LevelOfEnglishSection";
+import TechnicalSkillsSection from "@/components/cv-form/TechnicalSkillsSection";
+import ProjectsSection from "@/components/cv-form/ProjectsSection";
+import EducationsSection from "@/components/cv-form/EducationsSection";
+import LevelOfEnglishSection from "@/components/cv-form/LevelOfEnglishSection";
+import SectionHeading from "@/ui/form-section-heading";
+import AdditionalSection from "@/components/cv-form/AdditionalSection";
 
 // const CVFormValidationShema = Yup.object({
 //   first_name: Yup.string().required("First name is required"),
@@ -80,32 +82,25 @@ const CVForm = ({ titles, skills }: CVFormProps) => {
       <Form>
         <div className="body-font rounded-md border-2 border-gray-200 text-gray-600 dark:border-gray-700">
           <div className="container mx-auto px-16 py-6">
-            <h2 className="mb-10 mt-2 text-2xl font-bold text-primary-light italic">
-              Personal Details
-            </h2>
+            <SectionHeading className="mt-2">Personal Details</SectionHeading>
             <PersonalDetailsSection titles={titles} />
 
-            <h2 className="mb-10 mt-6 text-2xl font-bold text-primary-light italic">
-              Technical skills
-            </h2>
+            <SectionHeading>Techical skills</SectionHeading>
             <TechnicalSkillsSection skills={skills} />
 
-            <h2 className="mb-2 mt-6 text-2xl font-bold text-primary-light italic">
-              Projects
-            </h2>
+            <SectionHeading>Projects</SectionHeading>
             <ProjectsSection />
 
-            <h2 className="mb-2 mt-6 text-2xl font-bold text-primary-light italic">
-              Education
-            </h2>
+            <SectionHeading>Education</SectionHeading>
             <EducationsSection />
 
-            <h2 className="mb-2 mt-6 text-2xl font-bold text-primary-light italic">
-              Level of English
-            </h2>
+            <SectionHeading>Level of English</SectionHeading>
             <LevelOfEnglishSection />
 
-            <Button type="submit" className="w-full justify-center mt-4">
+            <SectionHeading>Additional</SectionHeading>
+            <AdditionalSection />
+
+            <Button type="submit" className="mt-6" fullWidth>
               Submit
             </Button>
           </div>
