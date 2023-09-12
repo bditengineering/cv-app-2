@@ -14,7 +14,7 @@ const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {
       <div className="flex flex-wrap py-4 md:flex-nowrap">
         <div className="flex flex-shrink-0 flex-col md:mb-0 md:w-64">
           <span className="title-font font-semibold text-gray-700 dark:text-gray-400">
-            Name
+            Name*
           </span>
         </div>
         <div className="flex md:flex-grow">
@@ -40,7 +40,7 @@ const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {
       <div className="flex flex-wrap py-4 md:flex-nowrap">
         <div className="flex flex-shrink-0 flex-col md:mb-0 md:w-64">
           <span className="title-font font-semibold text-gray-700 dark:text-gray-400">
-            Title
+            Title*
           </span>
         </div>
         <div className="md:flex-grow">
@@ -74,7 +74,7 @@ const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {
       <div className="flex flex-wrap py-4 md:flex-nowrap">
         <div className="flex flex-shrink-0 flex-col md:mb-0 md:w-64">
           <span className="title-font font-semibold text-gray-700 dark:text-gray-400">
-            Summary of Qualification
+            Summary of Qualification*
           </span>
         </div>
         <div className="md:flex-grow">

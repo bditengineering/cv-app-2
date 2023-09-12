@@ -324,6 +324,11 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
             <PlusCircle />
             <span>Add Project</span>
           </Button>
+          <ErrorMessage
+            className="w-full text-red-600"
+            name={"projects"}
+            component="span"
+          />
         </>
       )}
     />

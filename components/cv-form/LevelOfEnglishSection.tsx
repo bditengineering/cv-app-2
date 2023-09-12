@@ -13,7 +13,7 @@ const LevelOfEnglishSection = ({}: LevelOfEnglishSectionProps) => {
             Spoken*
           </span>
         </div>
-        <div className="flex md:flex-grow">
+        <div className="md:flex-grow">
           <Field
             name="english_spoken_level"
             className={inputVariants({ className: "w-full" })}
@@ -58,12 +58,12 @@ const LevelOfEnglishSection = ({}: LevelOfEnglishSectionProps) => {
                 </option>
               ))}
             </Field>
+            <ErrorMessage
+              className="w-full text-red-600"
+              name="english_written_level"
+              component="span"
+            />
           </div>
-          <ErrorMessage
-            className="w-full text-red-600"
-            name="english_written_level"
-            component="span"
-          />
         </div>
       </div>
     </>
