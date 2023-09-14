@@ -19,7 +19,7 @@ export default function NavBar() {
   const pathname = usePathname() as keyof typeof TITLE_PATHS;
 
   async function signOut() {
-    await axios.post("/auth/sign-out");
+    await axios.post("/api/sign-out");
     await router.push("/signin");
   }
 

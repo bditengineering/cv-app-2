@@ -30,7 +30,7 @@ const SignIn = () => {
     formData.append("password", values.password);
 
     try {
-      await axios.post("/auth/sign-in", formData);
+      await axios.post("/api/sign-in", formData);
       await push("/");
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -47,7 +47,7 @@ const SignIn = () => {
       validationSchema={signInSchema}
     >
       <div className="h-screen flex flex-1 px-4 py-12 items-center justify-center w-full">
-        <Form className="max-w-xs w-full" action="/auth/sign-in" method="post">
+        <Form className="max-w-xs w-full" action="/api/sign-in" method="post">
           <div className="mt-8 flex flex-row justify-start space-x-2">
             <div className="h-9 w-3 bg-primary-light"></div>
             <div className="text-center text-3xl font-bold">
