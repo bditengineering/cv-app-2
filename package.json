@@ -16,6 +16,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "formik": "^2.4.3",
+    "googleapis": "^126.0.1",
     "lucide-react": "^0.274.0",
     "next": "13.4.9",
     "postcss": "8.4.24",

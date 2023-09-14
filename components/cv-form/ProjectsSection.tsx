@@ -15,14 +15,17 @@ import {
   type FieldProps,
 } from "formik";
 import { Plus, PlusCircle, Trash2 } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
 
-interface ProjectsSectionProps {}
+interface ProjectsSectionProps {
+  setProjectsToRemove: Dispatch<SetStateAction<string[]>>;
+}
 
-const ProjectsSection = ({}: ProjectsSectionProps) => {
+const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
   const { values } = useFormikContext<CVDetails>();
 
   const renderProjects = (remove: <X = any>(index: number) => X | undefined) =>
-    values.projects.map((_project, index) => (
+    values?.projects?.map((project, index) => (
       <div className="mt-6" key={`project-${index}`}>
         <div className="flex justify-between">
           <h4 className="text-sky-500 mb-5">Project #{index + 1}</h4>
@@ -32,7 +35,12 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
             prefix={<Trash2 className="h-5 w-5" />}
             className="hover:text-red-600"
             type="button"
-            onClick={() => remove(index)}
+            onClick={() => {
+              remove(index);
+              if (project.id) {
+                setProjectsToRemove((prevIds) => [...prevIds, project.id]);
+              }
+            }}
           >
             Remove
           </Button>
@@ -48,9 +56,9 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
             <div className="mt-2">
               <Field
                 as={Input}
-                autoFocus
                 name={`projects[${index}].name`}
                 type="text"
+                autoFocus
               />
               <ErrorMessage
                 className="w-full text-red-600"
@@ -115,7 +123,7 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
             </label>
             <div className="mt-2">
               <Field name={`projects[${index}].date_start`}>
-                {({ form }: FieldProps) => {
+                {({ form, field }: FieldProps) => {
                   const setField = (date: Date) => {
                     const startDate = setDate(date, 15);
                     const ISODate = startDate.toISOString();
@@ -126,7 +134,11 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
                     );
                   };
 
-                  return <DatePicker setField={setField} />;
+                  const { value } = field;
+
+                  return (
+                    <DatePicker setField={setField} selectedDate={value} />
+                  );
                 }}
               </Field>
             </div>
@@ -141,7 +153,7 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
             </label>
             <div className="mt-2">
               <Field name={`projects[${index}].date_end`}>
-                {({ form }: FieldProps) => {
+                {({ form, field }: FieldProps) => {
                   const setField = (date: Date) => {
                     const startDate = setDate(date, 15);
                     const ISODate = startDate.toISOString();
@@ -149,7 +161,11 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
                     form.setFieldValue(`projects[${index}].date_end`, ISODate);
                   };
 
-                  return <DatePicker setField={setField} />;
+                  const { value } = field;
+
+                  return (
+                    <DatePicker setField={setField} selectedDate={value} />
+                  );
                 }}
               </Field>
             </div>
@@ -199,27 +215,28 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
               render={({ push, remove }: ArrayHelpers) => (
                 <div>
                   <div>
-                    {values.projects[index].technologies?.map(
-                      (_tech, techIndex) => (
-                        <Field
-                          key={`tech-${techIndex}`}
-                          as={Input}
-                          autoFocus
-                          fullWidth
-                          name={`[projects][${index}][technologies].${techIndex}`}
-                          className="my-2"
-                          renderSuffix={({
-                            disabled,
-                          }: PrefixSuffixRenderProps) => (
-                            <RemoveInputAction
-                              disabled={disabled}
-                              onClick={() => remove(techIndex)}
-                            />
-                          )}
-                          placeholder={`Technology #${techIndex + 1}`}
-                        />
-                      )
-                    )}
+                    {values.projects &&
+                      values.projects[index].technologies?.map(
+                        (_tech, techIndex) => (
+                          <Field
+                            key={`tech-${techIndex}`}
+                            as={Input}
+                            fullWidth
+                            name={`[projects][${index}][technologies].${techIndex}`}
+                            className="my-2"
+                            renderSuffix={({
+                              disabled,
+                            }: PrefixSuffixRenderProps) => (
+                              <RemoveInputAction
+                                disabled={disabled}
+                                onClick={() => remove(techIndex)}
+                              />
+                            )}
+                            placeholder={`Technology #${techIndex + 1}`}
+                            autoFocus
+                          />
+                        )
+                      )}
                   </div>
                   <Button
                     size="small"
@@ -252,27 +269,28 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
               render={({ push, remove }: ArrayHelpers) => (
                 <div>
                   <div>
-                    {values.projects[index].responsibilities?.map(
-                      (_responsibility, rIndex) => (
-                        <Field
-                          key={`responsibility-${rIndex}`}
-                          as={Input}
-                          autoFocus
-                          fullWidth
-                          name={`[projects][${index}][responsibilities].${rIndex}`}
-                          className="my-2"
-                          renderSuffix={({
-                            disabled,
-                          }: PrefixSuffixRenderProps) => (
-                            <RemoveInputAction
-                              disabled={disabled}
-                              onClick={() => remove(rIndex)}
-                            />
-                          )}
-                          placeholder={`Responsibility #${rIndex + 1}`}
-                        />
-                      )
-                    )}
+                    {values.projects &&
+                      values.projects[index].responsibilities?.map(
+                        (_responsibility, rIndex) => (
+                          <Field
+                            key={`responsibility-${rIndex}`}
+                            as={Input}
+                            fullWidth
+                            name={`[projects][${index}][responsibilities].${rIndex}`}
+                            className="my-2"
+                            renderSuffix={({
+                              disabled,
+                            }: PrefixSuffixRenderProps) => (
+                              <RemoveInputAction
+                                disabled={disabled}
+                                onClick={() => remove(rIndex)}
+                              />
+                            )}
+                            placeholder={`Responsibility #${rIndex + 1}`}
+                            autoFocus
+                          />
+                        )
+                      )}
                   </div>
                   <Button
                     size="small"
@@ -302,7 +320,7 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
     <FieldArray
       name="projects"
       render={({ push, remove }: ArrayHelpers) => (
-        <>
+        <div>
           {renderProjects(remove)}
           <Button
             variant="outlined"
@@ -325,11 +343,15 @@ const ProjectsSection = ({}: ProjectsSectionProps) => {
             <span>Add Project</span>
           </Button>
           <ErrorMessage
-            className="w-full text-red-600"
+            className="w-full"
             name={"projects"}
-            component="span"
+            render={(msg: unknown) => {
+              if (typeof msg === "string")
+                return <span className="text-red-600">{msg}</span>;
+              return null;
+            }}
           />
-        </>
+        </div>
       )}
     />
   );

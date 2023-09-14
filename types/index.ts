@@ -14,8 +14,10 @@ export type DbResultOk<T> = T extends PromiseLike<{ data: infer U }>
   : never;
 export type DbResultErr = PostgrestError;
 
+export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+
 export type CV = Tables<"cv">;
-export type CVSKill = Tables<"cv_skill">;
+export type CVSkill = Tables<"cv_skill">;
 export type Education = Tables<"educations">;
 export type Project = Tables<"projects">;
 export type Certification = Tables<"certifications">;
@@ -35,10 +37,10 @@ export type CVWithTitlesAndUser = CV & {
 };
 
 export type CVDetails = Partial<CV> & {
-  educations: Education[];
-  projects: Project[];
-  certifications: Certification[];
-  cv_skill: CVSKill[];
+  educations?: Education[];
+  projects?: Project[];
+  certifications?: Certification[];
+  cv_skill?: CVSkill[];
 };
 
 export type TitlesResponse = Pick<Title, "id" | "name">;

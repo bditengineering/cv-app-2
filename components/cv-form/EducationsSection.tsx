@@ -10,16 +10,21 @@ import {
   type ArrayHelpers,
 } from "formik";
 import { PlusCircle, Trash2 } from "lucide-react";
+import type { Dispatch, SetStateAction } from "react";
 
-interface EducationsSectionProps {}
+interface EducationsSectionProps {
+  setEducationsToRemove: Dispatch<SetStateAction<string[]>>;
+}
 
-const EducationsSection = ({}: EducationsSectionProps) => {
+const EducationsSection = ({
+  setEducationsToRemove,
+}: EducationsSectionProps) => {
   const { values } = useFormikContext<CVDetails>();
 
   const renderEducations = (
     remove: <X = any>(index: number) => X | undefined
   ) =>
-    values.educations.map((_education, index) => (
+    values?.educations?.map((education, index) => (
       <div className="mt-6" key={`education-${index}`}>
         <div className="flex justify-between">
           <h4 className="text-sky-500 mb-5">Education #{index + 1}</h4>
@@ -29,7 +34,10 @@ const EducationsSection = ({}: EducationsSectionProps) => {
             prefix={<Trash2 className="h-5 w-5" />}
             className="hover:text-red-600"
             type="button"
-            onClick={() => remove(index)}
+            onClick={() => {
+              remove(index);
+              setEducationsToRemove((prevIds) => [...prevIds, education.id]);
+            }}
           >
             Remove
           </Button>
