@@ -14,7 +14,7 @@ const TechnicalSkillsSection = ({ skills }: TechnicalSkillsSectionProps) => {
   const { values } = useFormikContext<CVDetails>();
 
   const isChecked = (skill: any) =>
-    values?.cv_skill?.some((CVSkill: any) => CVSkill.skill_id === skill.id);
+    values.cv_skill.some((cvSkill: any) => cvSkill.skill_id === skill.id);
 
   const handleOnCheck = (
     event: ChangeEvent<HTMLInputElement>,
@@ -24,12 +24,10 @@ const TechnicalSkillsSection = ({ skills }: TechnicalSkillsSectionProps) => {
     if (event.target.checked) {
       arrayHelpers.push({ skill_id: skill.id });
     } else {
-      const index = values?.cv_skill?.findIndex(
-        (CVSkill) => CVSkill.skill_id === skill.id
+      const index = values.cv_skill.findIndex(
+        (cvSkill) => cvSkill.skill_id === skill.id
       );
-      if (index && index >= 0) {
-        arrayHelpers.remove(index);
-      }
+      arrayHelpers.remove(index);
     }
   };
 

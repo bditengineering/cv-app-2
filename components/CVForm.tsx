@@ -1,6 +1,6 @@
 "use client";
 
-import { CVDetails, TitlesResponse, OrderedSkillGroup, CVSkill } from "@/types";
+import { CVDetails, TitlesResponse, OrderedSkillGroup } from "@/types";
 import { Form, Formik } from "formik";
 import PersonalDetailsSection from "@/components/cv-form/PersonalDetailsSection";
 import Button from "@/ui/button";
@@ -11,10 +11,6 @@ import EducationsSection from "@/components/cv-form/EducationsSection";
 import LevelOfEnglishSection from "@/components/cv-form/LevelOfEnglishSection";
 import SectionHeading from "@/ui/form-section-heading";
 import AdditionalSection from "@/components/cv-form/AdditionalSection";
-import { useState } from "react";
-import { edgeUploadInvocation, upsertCV } from "@/api/client";
-import { useRouter } from "next/navigation";
-import { ScrollToFieldError } from "@/components/ScrollToFieldError";
 
 const CVFormValidationShema = Yup.object({
   first_name: Yup.string().required("First name is required"),
@@ -56,75 +52,34 @@ const CVFormValidationShema = Yup.object({
 interface CVFormProps {
   titles: TitlesResponse[];
   skills: OrderedSkillGroup;
-  cv?: CVDetails;
-  initialUserSkills?: CVSkill[];
 }
 
-const initialValues: CVDetails = {
-  first_name: "",
-  last_name: "",
-  title_id: "",
-  summary: "",
-  educations: [],
-  english_written_level: "",
-  english_spoken_level: "",
-  projects: [],
-  certifications: [],
-  personal_qualities: [],
-  cv_skill: [],
-};
+const CVForm = ({ titles, skills }: CVFormProps) => {
+  const initialValues: CVDetails = {
+    first_name: "",
+    last_name: "",
+    title_id: "",
+    summary: "",
+    educations: [],
+    english_written_level: "",
+    english_spoken_level: "",
+    projects: [],
+    certifications: [],
+    personal_qualities: [],
+    cv_skill: [],
+  };
 
-const CVForm = ({
-  titles,
-  skills,
-  initialUserSkills = [],
-  cv = initialValues,
-}: CVFormProps) => {
-  const { push, refresh } = useRouter();
-
-  const [errorMessage, setErrorMessage] = useState<string>();
-  const [educationsToRemove, setEducationsToRemove] = useState<string[]>([]);
-  const [certificationsToRemove, setCertificationsToRemove] = useState<
-    string[]
-  >([]);
-  const [projectsToRemove, setProjectsToRemove] = useState<string[]>([]);
-
-  const handleSubmit = async (values: CVDetails) => {
-    try {
-      const cvId = await upsertCV(
-        values,
-        initialUserSkills,
-        educationsToRemove,
-        certificationsToRemove,
-        projectsToRemove
-      );
-
-      const title = values.title_id
-        ? // when title_id is present, find *will* find and return title object
-          titles.find((title) => title.id === values.title_id)!.name
-        : "";
-      await edgeUploadInvocation(values, title, cvId);
-    } catch (error) {
-      console.log(error);
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      }
-      return;
-    }
-
-    push("/");
-    refresh();
+  const handleSubmit = (values: CVDetails) => {
+    console.log(values);
   };
 
   return (
     <Formik
-      initialValues={cv}
+      initialValues={initialValues}
       onSubmit={handleSubmit}
       validationSchema={CVFormValidationShema}
-      enableReinitialize
     >
       <Form>
-        <ScrollToFieldError />
         <div className="body-font rounded-md border-2 border-gray-200 text-gray-600 dark:border-gray-700">
           <div className="container mx-auto px-16 py-6">
             <SectionHeading className="mt-2">Personal Details</SectionHeading>
@@ -134,28 +89,20 @@ const CVForm = ({
             <TechnicalSkillsSection skills={skills} />
 
             <SectionHeading>Projects</SectionHeading>
-            <ProjectsSection setProjectsToRemove={setProjectsToRemove} />
+            <ProjectsSection />
 
             <SectionHeading>Education</SectionHeading>
-            <EducationsSection setEducationsToRemove={setEducationsToRemove} />
+            <EducationsSection />
 
             <SectionHeading>Level of English</SectionHeading>
             <LevelOfEnglishSection />
 
             <SectionHeading>Additional</SectionHeading>
-            <AdditionalSection
-              setCertificationsToRemove={setCertificationsToRemove}
-            />
+            <AdditionalSection />
 
             <Button type="submit" className="mt-6" fullWidth>
               Submit
             </Button>
-
-            {errorMessage && (
-              <div className="mt-2 flex font-semibold text-red-600 justify-center text-base">
-                {errorMessage}
-              </div>
-            )}
           </div>
         </div>
       </Form>

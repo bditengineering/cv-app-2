@@ -12,22 +12,18 @@ import axios from "axios";
 
 const TITLE_PATHS = {
   "/new": "Add New CV",
-  "^/edit/.*": "Edit CV",
 } as const;
 
 export default function NavBar() {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname() as keyof typeof TITLE_PATHS;
 
   async function signOut() {
-    await axios.post("/api/sign-out");
+    await axios.post("/auth/sign-out");
     await router.push("/signin");
   }
 
-  const editPattern = /^\/edit\/(.*)/;
-
-  const match = pathname.match(editPattern);
-  const title = match ? "Edit CV" : pathname === "/new" ? "Add New CV" : null;
+  const title = TITLE_PATHS[pathname];
 
   return (
     <Disclosure as="nav" className="w-full border-b border-b-gray-200">
