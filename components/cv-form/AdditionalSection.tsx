@@ -11,16 +11,21 @@ import {
   useFormikContext,
 } from "formik";
 import { Plus, Trash2 } from "lucide-react";
+import type { Dispatch, SetStateAction } from "react";
 
-interface AdditionalSectionsProps {}
+interface AdditionalSectionsProps {
+  setCertificationsToRemove: Dispatch<SetStateAction<string[]>>;
+}
 
-const AdditionalSections = ({}: AdditionalSectionsProps) => {
+const AdditionalSections = ({
+  setCertificationsToRemove,
+}: AdditionalSectionsProps) => {
   const { values } = useFormikContext<CVDetails>();
 
   const renderCertifications = (
     remove: <X = any>(index: number) => X | undefined
   ) =>
-    values.certifications.map((_certification, index) => (
+    values?.certifications?.map((certification, index) => (
       <div className="flex flex-col w-full gap-3" key={`certificate-${index}`}>
         <div className="flex justify-between">
           <h4 className="text-sky-500 mb-5">Certificate #{index + 1}</h4>
@@ -30,7 +35,13 @@ const AdditionalSections = ({}: AdditionalSectionsProps) => {
             prefix={<Trash2 className="h-5 w-5" />}
             className="hover:text-red-600"
             type="button"
-            onClick={() => remove(index)}
+            onClick={() => {
+              remove(index);
+              setCertificationsToRemove((prevIds) => [
+                ...prevIds,
+                certification.id,
+              ]);
+            }}
           >
             Remove
           </Button>
@@ -94,7 +105,11 @@ const AdditionalSections = ({}: AdditionalSectionsProps) => {
             <div className="flex flex-col gap-3 w-full">
               {renderCertifications(remove)}
               <div
-                className={clsx(values.certifications.length > 0 && "ml-auto")}
+                className={clsx(
+                  values?.certifications?.length &&
+                    values?.certifications?.length > 0 &&
+                    "ml-auto"
+                )}
               >
                 <Button
                   variant="plain"

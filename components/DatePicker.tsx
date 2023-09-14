@@ -16,10 +16,16 @@ import { inputVariants } from "@/ui/input";
 
 interface DatePickerProps {
   setField?: (date: Date) => void;
+  selectedDate?: string;
 }
 
-export default function DatePicker({ setField }: DatePickerProps) {
-  const [date, setDate] = React.useState<Date>();
+export default function DatePicker({
+  setField,
+  selectedDate,
+}: DatePickerProps) {
+  const [date, setDate] = React.useState<Date | undefined>(
+    selectedDate ? new Date(selectedDate) : undefined
+  );
 
   return (
     <Popover>
