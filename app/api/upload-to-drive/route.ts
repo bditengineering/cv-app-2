@@ -11,9 +11,7 @@ export const dynamic = "force-dynamic";
  * @param{string} filneName folder ID
  * */
 async function uploadFile(fileName: string, folderName: string) {
-  console.log("krece upload");
   const supabase = createRouteHandlerClient({ cookies });
-  console.log("napravo supabase client");
 
   const gdriveSettings = process.env.GOOGLE_DRIVE_SETTINGS || "";
   const driveFolderId = process.env.GOOGLE_DRIVE_FOLDER_ID || "";
@@ -22,12 +20,6 @@ async function uploadFile(fileName: string, folderName: string) {
   const { data, error } = await supabase.storage
     .from("pdfs")
     .download(fileName);
-
-  console.log(driveCredentials);
-  console.log(fileName);
-  console.log(data);
-  console.log(error);
-  console.log("skinuo fajl sa supabase");
 
   if (error) throw error;
 

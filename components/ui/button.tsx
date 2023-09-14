@@ -96,17 +96,13 @@ const Button = React.forwardRef(
             variant,
           })
         )}
-        disabled={!!disabled}
+        disabled={!!disabled || isLoading}
         onClick={onClick}
         type={type}
         ref={ref}
       >
         {prefix}
-        {isLoading ? (
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          children
-        )}
+        {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : children}
         {suffix}
       </button>
     );

@@ -90,6 +90,7 @@ const CVForm = ({
   const [projectsToRemove, setProjectsToRemove] = useState<string[]>([]);
 
   const handleSubmit = async (values: CVDetails) => {
+    setErrorMessage("");
     try {
       const cvId = await upsertCV(
         values,
@@ -105,7 +106,6 @@ const CVForm = ({
         : "";
       await edgeUploadInvocation(values, title, cvId);
     } catch (error) {
-      console.log(error);
       if (error instanceof Error) {
         setErrorMessage(error.message);
       }
@@ -123,42 +123,51 @@ const CVForm = ({
       validationSchema={CVFormValidationShema}
       enableReinitialize
     >
-      <Form>
-        <ScrollToFieldError />
-        <div className="body-font rounded-md border-2 border-gray-200 text-gray-600 dark:border-gray-700">
-          <div className="container mx-auto px-16 py-6">
-            <SectionHeading className="mt-2">Personal Details</SectionHeading>
-            <PersonalDetailsSection titles={titles} />
+      {({ isSubmitting }) => (
+        <Form>
+          <ScrollToFieldError />
+          <div className="body-font rounded-md border-2 border-gray-200 text-gray-600 dark:border-gray-700">
+            <div className="container mx-auto px-16 py-6">
+              <SectionHeading className="mt-2">Personal Details</SectionHeading>
+              <PersonalDetailsSection titles={titles} />
 
-            <SectionHeading>Techical skills</SectionHeading>
-            <TechnicalSkillsSection skills={skills} />
+              <SectionHeading>Techical skills</SectionHeading>
+              <TechnicalSkillsSection skills={skills} />
 
-            <SectionHeading>Projects</SectionHeading>
-            <ProjectsSection setProjectsToRemove={setProjectsToRemove} />
+              <SectionHeading>Projects</SectionHeading>
+              <ProjectsSection setProjectsToRemove={setProjectsToRemove} />
 
-            <SectionHeading>Education</SectionHeading>
-            <EducationsSection setEducationsToRemove={setEducationsToRemove} />
+              <SectionHeading>Education</SectionHeading>
+              <EducationsSection
+                setEducationsToRemove={setEducationsToRemove}
+              />
 
-            <SectionHeading>Level of English</SectionHeading>
-            <LevelOfEnglishSection />
+              <SectionHeading>Level of English</SectionHeading>
+              <LevelOfEnglishSection />
 
-            <SectionHeading>Additional</SectionHeading>
-            <AdditionalSection
-              setCertificationsToRemove={setCertificationsToRemove}
-            />
+              <SectionHeading>Additional</SectionHeading>
+              <AdditionalSection
+                setCertificationsToRemove={setCertificationsToRemove}
+              />
 
-            <Button type="submit" className="mt-6" fullWidth>
-              Submit
-            </Button>
+              <Button
+                type="submit"
+                className="mt-6"
+                fullWidth
+                isLoading={isSubmitting}
+              >
+                Submit
+              </Button>
 
-            {errorMessage && (
-              <div className="mt-2 flex font-semibold text-red-600 justify-center text-base">
-                {errorMessage}
-              </div>
-            )}
+              {errorMessage && (
+                <div className="mt-2 flex font-semibold text-red-600 justify-center text-base">
+                  {errorMessage}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </Form>
+        </Form>
+      )}
     </Formik>
   );
 };

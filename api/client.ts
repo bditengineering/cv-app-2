@@ -285,7 +285,6 @@ async function uploadPdf(fileName: string, folderName: string) {
     method: "POST",
     body: JSON.stringify({ fileName: fileName, folderName: folderName }),
   });
-  console.log(response);
   if (!response.ok) {
     throw new Error("Error uploading file to google drive");
   }
