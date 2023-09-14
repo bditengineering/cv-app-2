@@ -1,3 +1,5 @@
+"use client";
+
 import { CVDetails } from "@/types";
 import { useFormikContext, FormikErrors } from "formik";
 import { useEffect } from "react";
