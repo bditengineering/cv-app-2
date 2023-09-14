@@ -13,8 +13,8 @@ interface TechnicalSkillsSectionProps {
 const TechnicalSkillsSection = ({ skills }: TechnicalSkillsSectionProps) => {
   const { values } = useFormikContext<CVDetails>();
 
-  const isChecked = (skill: any) =>
-    values?.cv_skill?.some((CVSkill: any) => CVSkill.skill_id === skill.id);
+  const isChecked = (skill: SkillWithoutGroup) =>
+    values?.cv_skill?.some((CVSkill) => CVSkill.skill_id === skill.id);
 
   const handleOnCheck = (
     event: ChangeEvent<HTMLInputElement>,
@@ -53,7 +53,7 @@ const TechnicalSkillsSection = ({ skills }: TechnicalSkillsSectionProps) => {
                   >
                     {skillGroup.skills.map((skill) => (
                       <Checkbox
-                        checked={isChecked(skill)}
+                        checked={!!isChecked(skill)}
                         key={skill.id}
                         name={"cv_skill-" + skill.id}
                         onChange={(event) =>
