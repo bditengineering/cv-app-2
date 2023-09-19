@@ -134,8 +134,8 @@ export async function POST(req: NextRequest) {
       await req.json();
 
     await uploadFile(fileName, folderName);
-    NextResponse.json({ success: true });
+    return NextResponse.json({ successclear: true });
   } catch (error) {
-    NextResponse.json({ success: false });
+    return NextResponse.json({ success: false });
   }
 }
