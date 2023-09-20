@@ -1,72 +1,117 @@
-import { cva } from "class-variance-authority";
+"use client";
+import * as React from "react";
 import { cn } from "@/lib/utils";
 
-interface BaseComponentProps {
-  className?: string;
-  children?: React.ReactNode;
-}
+const Table = React.forwardRef<
+  HTMLTableElement,
+  React.HTMLAttributes<HTMLTableElement>
+>(({ className, ...props }, ref) => (
+  <div className="w-full my-4 border bg-white border-gray-200 rounded-xl overflow-hidden shadow-sm relative">
+    <table ref={ref} className={cn("w-full border-0", className)} {...props} />
+  </div>
+));
+Table.displayName = "Table";
 
-interface TableCellProps extends BaseComponentProps {
-  align?: "left" | "center" | "right";
-  header?: boolean;
-}
+const TableHeader = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <thead
+    ref={ref}
+    className={cn(
+      "w-full border-0 bg-gray-50 text-gray-600 font-normal",
+      className
+    )}
+    {...props}
+  />
+));
+TableHeader.displayName = "TableHeader";
 
-export const tableContainerClasses = cva(
-  "w-full my-4 border bg-white border-gray-200 rounded-xl overflow-hidden shadow-sm"
-);
+const TableBody = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tbody
+    ref={ref}
+    className={cn("[&_tr:last-child]:border-0", className)}
+    {...props}
+  />
+));
+TableBody.displayName = "TableBody";
 
-export const TableContainer = ({ children, className }: BaseComponentProps) => (
-  <div className={cn(tableContainerClasses({ className }))}>{children}</div>
-);
+const TableFooter = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tfoot
+    ref={ref}
+    className={cn("bg-primary font-medium text-primary-foreground", className)}
+    {...props}
+  />
+));
+TableFooter.displayName = "TableFooter";
 
-export const Table = ({ children }: BaseComponentProps) => (
-  <table className="w-full border-0">{children}</table>
-);
+const TableRow = React.forwardRef<
+  HTMLTableRowElement,
+  React.HTMLAttributes<HTMLTableRowElement>
+>(({ className, ...props }, ref) => (
+  <tr
+    ref={ref}
+    className={"border-b border-b-gray-200 [&:last-child]:border-b-0 "}
+    {...props}
+  />
+));
+TableRow.displayName = "TableRow";
 
-export const tableRowClasses = cva("border-b border-b-gray-200", {
-  variants: {
-    header: {
-      true: "bg-gray-50",
-      false: "[&:last-child]:border-b-0",
-    },
-  },
-});
+const TableHead = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <th
+    ref={ref}
+    className={cn(
+      "h-10 px-6 text-left align-middle font-normal [&:has([role=checkbox])]:pr-0",
+      className
+    )}
+    {...props}
+  />
+));
+TableHead.displayName = "TableHead";
 
-export const TableRow = ({
-  children,
-  className,
-  header = false,
-}: BaseComponentProps & { header?: boolean }) => (
-  <tr className={cn(tableRowClasses({ className, header }))}>{children}</tr>
-);
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <td
+    ref={ref}
+    className={cn(
+      "px-6 border-0 text-gray-600 leading-normal py-4 text-base text-left",
+      className
+    )}
+    {...props}
+  />
+));
+TableCell.displayName = "TableCell";
 
-export const tableCellClasses = cva(
-  "px-6 border-0 text-gray-600 leading-normal",
-  {
-    variants: {
-      align: {
-        left: "text-left",
-        center: "text-center",
-        right: "text-right",
-      },
-      header: {
-        true: "py-3 text-sm font-medium",
-        false: "py-4 text-base",
-      },
-    },
-    defaultVariants: {
-      header: false,
-    },
-  }
-);
+const TableCaption = React.forwardRef<
+  HTMLTableCaptionElement,
+  React.HTMLAttributes<HTMLTableCaptionElement>
+>(({ className, ...props }, ref) => (
+  <caption
+    ref={ref}
+    className={cn("mt-4 text-sm text-muted-foreground", className)}
+    {...props}
+  />
+));
+TableCaption.displayName = "TableCaption";
 
-export const TableCell = ({
-  children,
-  className,
-  header,
-  align = header === true ? "center" : "left",
-}: TableCellProps) => (
-  <td className={cn(tableCellClasses({ align, className, header }))}>
-    {children}
-  </td>
-);
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+};

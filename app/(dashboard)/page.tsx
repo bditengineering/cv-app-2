@@ -1,5 +1,6 @@
-import CVList from "@/components/CVList";
 import { createServerComponentClient } from "@/lib/supabase-server";
+import { columns } from "@/app/(dashboard)/columns";
+import { DataTable } from "@/app/(dashboard)/data-table";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +12,7 @@ const Home = async () => {
     // should this be user: users!updated_by(*) ?
     .select("*, titles(*), user: users(*)");
 
-  return <CVList cvs={data} />;
+  return <DataTable columns={columns} data={data || []} />;
 };
 
 export default Home;
