@@ -1,14 +1,28 @@
 "use client";
 
+import Button from "@/ui/button";
 import { createClientComponentClient } from "@/lib/supabase-client";
 import { CVWithTitlesAndUser } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
+import { ChevronsUpDown } from "lucide-react";
 import Link from "next/link";
 
 export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
   {
-    accessorKey: "name",
-    header: "Name",
+    id: "name",
+    accessorFn: (row) => `${row.first_name} ${row.last_name}`,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="plain"
+          className="text-gray-500 focus:text-gray-600"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ChevronsUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const firstName = row.original.first_name;
       const lastName = row.original.last_name;
@@ -19,8 +33,20 @@ export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
     },
   },
   {
-    accessorKey: "titleName",
-    header: "Role",
+    id: "titles",
+    accessorKey: "titles.name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="plain"
+          className="text-gray-500 focus:text-gray-600"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Role
+          <ChevronsUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const titleName = row.original.titles?.name;
 
@@ -28,8 +54,21 @@ export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
     },
   },
   {
-    accessorKey: "update",
-    header: "Last update",
+    id: "updatedAt",
+    accessorFn: (row) => new Date(row.updated_at),
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="plain"
+          className="text-gray-500 focus:text-gray-600"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Last Update
+          <ChevronsUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    sortingFn: "datetime",
     cell: ({ row }) => {
       const updatedAt = row.original.updated_at;
       const email = row.original.user?.email;
