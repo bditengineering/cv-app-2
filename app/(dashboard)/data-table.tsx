@@ -21,7 +21,7 @@ import {
   TableRow,
 } from "@/ui/table";
 import { DataTablePagination } from "@/components/DataTablePagination";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Input from "@/ui/input";
 import {
   Select,
@@ -72,7 +72,7 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center py-1">
         <Input
-          placeholder="Filter people..."
+          placeholder="Filter name..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
@@ -80,12 +80,13 @@ export function DataTable<TData, TValue>({
           className="max-w-sm px-2"
         />
         <Select
-          value={(table.getColumn("titles")?.getFilterValue() as string) ?? ""}
+          key={table.getColumn("titles")?.getFilterValue() as string}
+          value={table.getColumn("titles")?.getFilterValue() as string}
           onValueChange={(value) => {
             table.getColumn("titles")?.setFilterValue(value);
           }}
         >
-          <SelectTrigger className="h-8 max-w-sm">
+          <SelectTrigger className="text-gray-500 w-[220px]">
             <SelectValue placeholder="Filter Role..." />
           </SelectTrigger>
           <SelectContent side="top">
@@ -96,19 +97,18 @@ export function DataTable<TData, TValue>({
             ))}
           </SelectContent>
         </Select>
-        {(table.getColumn("titles")?.getFilterValue() as string) && (
-          <Button
-            size="small"
-            variant="plain"
-            className="mx-1"
-            type="button"
-            onClick={() => table.getColumn("titles")?.setFilterValue("")}
-          >
-            <FilterX className="w-4 h-4" />
-          </Button>
-        )}
+        <Button
+          disabled={!table.getColumn("titles")?.getFilterValue()}
+          size="small"
+          variant="plain"
+          className="mx-1"
+          type="button"
+          onClick={() => table.getColumn("titles")?.setFilterValue("")}
+        >
+          <FilterX className="w-4 h-4" />
+        </Button>
       </div>
-      <Table>
+      <Table className="w-full sm:w-[900px]">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
