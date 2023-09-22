@@ -70,6 +70,44 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
+      <div className="flex items-center py-1">
+        <Input
+          placeholder="Filter name..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("name")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm px-2"
+        />
+        <Select
+          key={table.getColumn("titles")?.getFilterValue() as string}
+          value={table.getColumn("titles")?.getFilterValue() as string}
+          onValueChange={(value) => {
+            table.getColumn("titles")?.setFilterValue(value);
+          }}
+        >
+          <SelectTrigger className="text-gray-500 w-[220px]">
+            <SelectValue placeholder="Filter Role..." />
+          </SelectTrigger>
+          <SelectContent side="top">
+            {titles.map((title) => (
+              <SelectItem key={title.id} value={title.name}>
+                {title.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Button
+          disabled={!table.getColumn("titles")?.getFilterValue()}
+          size="small"
+          variant="plain"
+          className="mx-1"
+          type="button"
+          onClick={() => table.getColumn("titles")?.setFilterValue("")}
+        >
+          <FilterX className="w-4 h-4" />
+        </Button>
+      </div>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
