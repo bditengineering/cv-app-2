@@ -46,46 +46,54 @@ const SignIn = () => {
       initialValues={initialValues}
       validationSchema={signInSchema}
     >
-      <div className="h-screen flex flex-1 px-4 py-12 items-center justify-center w-full">
-        <Form className="max-w-xs w-full" action="/api/sign-in" method="post">
-          <div className="mt-8 flex flex-row justify-start space-x-2">
-            <div className="h-9 w-3 bg-primary-light"></div>
-            <div className="text-center text-3xl font-bold">
-              <h1>Sign in</h1>
+      {({ isSubmitting }) => (
+        <div className="h-screen flex flex-1 px-4 py-12 items-center justify-center w-full">
+          <Form className="max-w-xs w-full" action="/api/sign-in" method="post">
+            <div className="mt-8 flex flex-row justify-start space-x-2">
+              <div className="h-9 w-3 bg-primary-light"></div>
+              <div className="text-center text-3xl font-bold">
+                <h1>Sign in</h1>
+              </div>
             </div>
-          </div>
-          <div className="mt-8 flex flex-col">
-            <Field as={Input} name="email" type="email" placeholder="Email" />
-            <ErrorMessage
-              className="text-sm text-red-500"
-              name="email"
-              component="span"
-            />
+            <div className="mt-8 flex flex-col">
+              <Field as={Input} name="email" type="email" placeholder="Email" />
+              <ErrorMessage
+                className="text-sm text-red-500"
+                name="email"
+                component="span"
+              />
 
-            <Field
-              as={Input}
-              name="password"
-              type="password"
-              placeholder="Password"
-              className="mt-3"
-            />
-            <ErrorMessage
-              className="text-sm text-red-500"
-              name="password"
-              component="span"
-            />
-          </div>
-          <Button size="small" className="mt-4" type="submit" fullWidth>
-            Submit
-          </Button>
+              <Field
+                as={Input}
+                name="password"
+                type="password"
+                placeholder="Password"
+                className="mt-3"
+              />
+              <ErrorMessage
+                className="text-sm text-red-500"
+                name="password"
+                component="span"
+              />
+            </div>
+            <Button
+              size="small"
+              className="mt-4"
+              type="submit"
+              fullWidth
+              isLoading={isSubmitting}
+            >
+              Submit
+            </Button>
 
-          {serverErrorMessage && (
-            <span className="my-2 flex justify-start text-red-500">
-              {serverErrorMessage}
-            </span>
-          )}
-        </Form>
-      </div>
+            {serverErrorMessage && (
+              <span className="my-2 flex justify-start text-red-500">
+                {serverErrorMessage}
+              </span>
+            )}
+          </Form>
+        </div>
+      )}
     </Formik>
   );
 };

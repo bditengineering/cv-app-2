@@ -14,9 +14,9 @@ export default function NavBar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  async function signOut() {
-    await axios.post("/api/sign-out");
-    await router.push("/signin");
+  function signOut() {
+    axios.post("/api/sign-out");
+    router.push("/signin");
   }
 
   const editPattern = /^\/edit\/(.*)/;
