@@ -7,7 +7,12 @@ const Table = React.forwardRef<
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
   <div className="w-full my-4 border bg-white border-gray-200 rounded-xl overflow-hidden shadow-sm relative">
-    <table ref={ref} className={cn("w-full border-0", className)} {...props} />
+    <table
+      ref={ref}
+      className={cn("w-full border-0", className)}
+      {...props}
+      style={{ tableLayout: "fixed" }}
+    />
   </div>
 ));
 Table.displayName = "Table";

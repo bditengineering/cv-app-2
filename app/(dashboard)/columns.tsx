@@ -112,9 +112,9 @@ export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
       const titleName = row.original.titles?.name;
 
       return (
-        <div className="flex gap-3">
+        <div className="flex gap-3 float-right">
           <button
-            className="text-base font-semibold leading-normal text-gray-600"
+            className="text-base font-semibold leading-normal text-gray-600 hover:text-gray-500"
             type="button"
             onClick={() => downloadPdf(`BDIT_${firstName}_${titleName}`)}
           >
@@ -122,7 +122,7 @@ export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
           </button>
 
           <Link
-            className="text-base font-semibold leading-normal text-primary-light hover:text-sky-800"
+            className="text-base font-semibold leading-normal text-primary-light hover:text-sky-600"
             prefetch={false}
             href={`/edit/${row.original.id}`}
           >
