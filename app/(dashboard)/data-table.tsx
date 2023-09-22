@@ -15,10 +15,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/ui/table";
+import { TitlesResponse } from "@/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  titles: TitlesResponse[];
 }
 
 export function DataTable<TData, TValue>({
