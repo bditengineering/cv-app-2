@@ -14,7 +14,9 @@ const Home = async () => {
     .select("*, titles(*), user: users(*)");
   const titles = await fetchTitles();
 
-  return <DataTable titles={titles} columns={columns} data={data || []} />;
+  return (
+    <DataTable titles={titles || []} columns={columns} data={data || []} />
+  );
 };
 
 export default Home;
