@@ -29,7 +29,7 @@ export const buttonVariants = cva(
         ],
         plain: [
           "text-gray-600 focus:bg-gray-50 focus:text-sky-700",
-          "hover:bg-sky-50 hover:text-sky-700",
+          "hover:bg-sky-50 hover:text-sky-700 focus:hover:text-sky-700",
           "disabled:hover:bg-transparent disabled:hover:text-gray-600",
         ],
       },
