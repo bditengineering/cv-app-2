@@ -58,7 +58,7 @@ interface CVFormProps {
   skills: OrderedSkillGroup;
   cv?: CVDetails;
   initialUserSkills?: CVSkill[];
-  isAdmin: boolean;
+  isAdmin?: boolean;
 }
 
 const initialValues: CVDetails = {
@@ -81,7 +81,7 @@ const CVForm = ({
   skills,
   initialUserSkills = [],
   cv = initialValues,
-  isAdmin,
+  isAdmin = false,
 }: CVFormProps) => {
   const { push, refresh } = useRouter();
 
