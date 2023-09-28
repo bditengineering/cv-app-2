@@ -82,6 +82,7 @@ export interface Database {
           english_written_level: string | null;
           first_name: string;
           id: string;
+          is_certified: boolean | null;
           last_name: string;
           personal_qualities: string[] | null;
           summary: string | null;
@@ -96,6 +97,7 @@ export interface Database {
           english_written_level?: string | null;
           first_name: string;
           id?: string;
+          is_certified?: boolean | null;
           last_name: string;
           personal_qualities?: string[] | null;
           summary?: string | null;
@@ -110,6 +112,7 @@ export interface Database {
           english_written_level?: string | null;
           first_name?: string;
           id?: string;
+          is_certified?: boolean | null;
           last_name?: string;
           personal_qualities?: string[] | null;
           summary?: string | null;
