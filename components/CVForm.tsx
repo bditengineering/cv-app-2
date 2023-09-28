@@ -58,11 +58,13 @@ interface CVFormProps {
   skills: OrderedSkillGroup;
   cv?: CVDetails;
   initialUserSkills?: CVSkill[];
+  isAdmin: boolean;
 }
 
 const initialValues: CVDetails = {
   first_name: "",
   last_name: "",
+  is_certified: false,
   title_id: "",
   summary: "",
   educations: [],
@@ -79,6 +81,7 @@ const CVForm = ({
   skills,
   initialUserSkills = [],
   cv = initialValues,
+  isAdmin,
 }: CVFormProps) => {
   const { push, refresh } = useRouter();
 
@@ -129,7 +132,7 @@ const CVForm = ({
           <div className="body-font rounded-md border-2 border-gray-200 text-gray-600 dark:border-gray-700">
             <div className="container mx-auto px-16 py-6">
               <SectionHeading className="mt-2">Personal Details</SectionHeading>
-              <PersonalDetailsSection titles={titles} />
+              <PersonalDetailsSection titles={titles} isAdmin={isAdmin} />
 
               <SectionHeading>Techical skills</SectionHeading>
               <TechnicalSkillsSection skills={skills} />

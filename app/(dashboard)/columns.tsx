@@ -35,7 +35,7 @@ export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
           <span>
             {firstName} {lastName}
           </span>
-          {!isCertified && (
+          {isCertified && (
             <div className="flex justify-center">
               <Image
                 src={certifiedPic}
