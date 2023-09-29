@@ -45,13 +45,13 @@ serve(async function handler(req: Request) {
       // Supabase API URL - env var exported by default.
       Deno.env.get("SUPABASE_URL") ?? "",
       // Supabase API ANON KEY - env var exported by default.
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
     );
 
     const { data, error } = await supabaseClient
       .from("cv")
       .select(
-        "*, projects(*), titles(name), educations(*), certifications(certificate_name, description), cv_skill(skill(name, skill_group(*)))"
+        "*, projects(*), titles(name), educations(*), certifications(certificate_name, description), cv_skill(skill(name, skill_group(*)))",
       )
       .eq("id", id);
     if (error) throw error;
@@ -108,16 +108,16 @@ serve(async function handler(req: Request) {
     const education =
       employee.education?.map(
         (item: any) =>
-          `${item.university_name}\n${item.degree}\n${item.start_year} - ${item.end_year}`
+          `${item.university_name}\n${item.degree}\n${item.start_year} - ${item.end_year}`,
       ) || [];
 
     const certifications =
       employee.certifications?.map(
-        (item: any) => `${item.certificate_name} - ${item.description}`
+        (item: any) => `${item.certificate_name} - ${item.description}`,
       ) || [];
 
     const skills: Record<string, Array<string>> = transformSkillsBySkillGroup(
-      employee.cv_skill
+      employee.cv_skill,
     );
 
     const educationBody = [

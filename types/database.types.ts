@@ -40,7 +40,7 @@ export interface Database {
             columns: ["user_id"];
             referencedRelation: "users";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       certifications: {
@@ -71,7 +71,7 @@ export interface Database {
             columns: ["cv_id"];
             referencedRelation: "cv";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       cv: {
@@ -138,7 +138,7 @@ export interface Database {
             columns: ["updated_by"];
             referencedRelation: "users";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       cv_skill: {
@@ -169,7 +169,7 @@ export interface Database {
             columns: ["skill_id"];
             referencedRelation: "skill";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       educations: {
@@ -206,7 +206,7 @@ export interface Database {
             columns: ["cv_id"];
             referencedRelation: "cv";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       projects: {
@@ -261,7 +261,7 @@ export interface Database {
             columns: ["cv_id"];
             referencedRelation: "cv";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       skill: {
@@ -286,7 +286,7 @@ export interface Database {
             columns: ["skill_group_id"];
             referencedRelation: "skill_group";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       skill_group: {
@@ -335,7 +335,7 @@ export interface Database {
             columns: ["created_by"];
             referencedRelation: "users";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       users: {
@@ -357,7 +357,7 @@ export interface Database {
             columns: ["id"];
             referencedRelation: "users";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
     };
