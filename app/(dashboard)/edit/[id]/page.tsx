@@ -25,7 +25,7 @@ const EditCvPage = async ({ params: { id } }: EditCvPageProps) => {
   const { data } = await supabase
     .from("admins")
     .select("id")
-    .filter("user_id", "eq", userId);
+    .eq("user_id", userId);
 
   const isAdmin = data?.length && data.length > 0 ? true : false;
 
