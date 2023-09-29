@@ -31,21 +31,18 @@ export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
       const isCertified = row.original.is_certified;
 
       return (
-        <div className="font-medium text-gray-900 flex gap-3">
+        <div className="font-medium text-gray-900 flex justify-between gap-3">
           <span>
             {firstName} {lastName}
           </span>
           {isCertified && (
-            <div className="flex justify-center">
+            <div className="flex shrink-0 items-center">
               <Image
+                alt="BDIT certified logo"
+                className="h-fit"
                 src={certifiedPic}
-                alt="Certified"
-                sizes="10vw"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                }}
-              />{" "}
+                width={80}
+              />
             </div>
           )}
         </div>
