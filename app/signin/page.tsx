@@ -47,8 +47,8 @@ const SignIn = () => {
       validationSchema={signInSchema}
     >
       {({ isSubmitting }) => (
-        <div className="h-screen flex flex-1 px-4 py-12 items-center justify-center w-full">
-          <Form className="max-w-xs w-full" action="/api/sign-in" method="post">
+        <div className="flex h-screen w-full flex-1 items-center justify-center px-4 py-12">
+          <Form className="w-full max-w-xs" action="/api/sign-in" method="post">
             <div className="flex flex-row justify-start space-x-2">
               <div className="h-9 w-3 bg-primary-light"></div>
               <div className="text-center text-3xl font-bold">

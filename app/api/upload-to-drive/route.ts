@@ -63,7 +63,7 @@ async function uploadFile(fileName: string, folderName: string) {
   }
 
   async function resolveFileNameForDrive(
-    initialFileName: string
+    initialFileName: string,
   ): Promise<string> {
     let currentFileName = initialFileName;
     let uniqueFileNameGenerated = false;
@@ -85,7 +85,7 @@ async function uploadFile(fileName: string, folderName: string) {
         if (currentFileName.match(regex)) {
           currentFileName = currentFileName.replace(
             regex,
-            (_, number) => `_${parseInt(number) + 1}`
+            (_, number) => `_${parseInt(number) + 1}`,
           );
         } else {
           currentFileName += "_1";
