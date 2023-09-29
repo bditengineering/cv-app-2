@@ -17,6 +17,7 @@
     "axios": "^1.5.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
     "formik": "^2.4.3",
     "googleapis": "^126.0.1",
     "lucide-react": "^0.274.0",
