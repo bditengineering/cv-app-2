@@ -51,7 +51,7 @@ export const buttonVariants = cva(
       size: "medium",
       variant: "default",
     },
-  }
+  },
 );
 
 interface ButtonProps
@@ -83,7 +83,7 @@ const Button = React.forwardRef(
       variant,
       isLoading = false,
     }: ButtonProps,
-    ref: React.Ref<HTMLButtonElement>
+    ref: React.Ref<HTMLButtonElement>,
   ) => {
     return (
       <button
@@ -94,7 +94,7 @@ const Button = React.forwardRef(
             fullWidth,
             size,
             variant,
-          })
+          }),
         )}
         disabled={!!disabled || isLoading}
         onClick={onClick}
@@ -106,7 +106,7 @@ const Button = React.forwardRef(
         {suffix}
       </button>
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

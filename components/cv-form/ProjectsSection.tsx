@@ -28,7 +28,7 @@ const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
     values?.projects?.map((project, index) => (
       <div className="mt-6" key={`project-${index}`}>
         <div className="flex justify-between">
-          <h4 className="text-sky-500 mb-5">Project #{index + 1}</h4>
+          <h4 className="mb-5 text-sky-500">Project #{index + 1}</h4>
           <Button
             size="small"
             variant="outlined"
@@ -45,7 +45,7 @@ const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
             Remove
           </Button>
         </div>
-        <div className="mt-2 mb-6 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div className="mb-6 mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div className="sm:col-span-2 sm:col-start-1">
             <label
               htmlFor={`projects[${index}].name`}
@@ -97,7 +97,7 @@ const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
           </div>
         </div>
 
-        <div className="mt-2 mb-6 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div className="mb-6 mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div className="sm:col-span-2 sm:col-start-1">
             <label
               htmlFor={`projects[${index}].name`}
@@ -130,7 +130,7 @@ const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
 
                     form.setFieldValue(
                       `projects[${index}].date_start`,
-                      ISODate
+                      ISODate,
                     );
                   };
 
@@ -172,7 +172,7 @@ const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
           </div>
 
           <div className="sm:col-span-2">
-            <label className="flex text-sm font-medium leading-6 text-gray-900 gap-3 w-fit">
+            <label className="flex w-fit gap-3 text-sm font-medium leading-6 text-gray-900">
               Ongoing
               <Field
                 className="text-primary-light"
@@ -204,7 +204,7 @@ const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
             </div>
           </div>
 
-          <div className="sm:col-span-2 items-center flex">
+          <div className="flex items-center sm:col-span-2">
             <span className="block text-sm font-medium leading-6 text-gray-900">
               Tools & Technologies*
             </span>
@@ -235,7 +235,7 @@ const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
                             placeholder={`Technology #${techIndex + 1}`}
                             autoFocus
                           />
-                        )
+                        ),
                       )}
                   </div>
                   <Button
@@ -258,7 +258,7 @@ const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
             />
           </div>
 
-          <div className="sm:col-span-2 flex items-center">
+          <div className="flex items-center sm:col-span-2">
             <span className="block text-sm font-medium leading-6 text-gray-900">
               Responsibilities*
             </span>
@@ -289,7 +289,7 @@ const ProjectsSection = ({ setProjectsToRemove }: ProjectsSectionProps) => {
                             placeholder={`Responsibility #${rIndex + 1}`}
                             autoFocus
                           />
-                        )
+                        ),
                       )}
                   </div>
                   <Button

@@ -47,7 +47,7 @@ export const inputVariants = cva(
       hasPrefix: false,
       hasSuffix: false,
     },
-  }
+  },
 );
 
 export interface PrefixSuffixRenderProps {
@@ -66,7 +66,7 @@ interface InputProps
 }
 
 function getElementWidth<RefType extends HTMLElement | null>(
-  elementRef: React.MutableRefObject<RefType>
+  elementRef: React.MutableRefObject<RefType>,
 ) {
   if (!elementRef?.current) {
     return "";
@@ -95,7 +95,7 @@ const Input = React.forwardRef(
       type = "text",
       ...restProps
     }: InputProps,
-    ref: React.Ref<HTMLInputElement>
+    ref: React.Ref<HTMLInputElement>,
   ) => {
     const prefixRef = useRef<HTMLSpanElement | null>(null);
     const suffixRef = useRef<HTMLSpanElement | null>(null);
@@ -170,7 +170,7 @@ const Input = React.forwardRef(
         ) : null}
       </div>
     );
-  }
+  },
 );
 Input.displayName = "Input";
 

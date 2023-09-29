@@ -34,7 +34,7 @@ const CVFormValidationShema = Yup.object({
         responsibilities: Yup.array()
           .of(Yup.string())
           .min(1, "Responsibilities on project are required"),
-      })
+      }),
     )
     .min(1, "You must have at least one project"),
   educations: Yup.array().of(
@@ -43,13 +43,13 @@ const CVFormValidationShema = Yup.object({
       degree: Yup.string().required("Degree is required"),
       start_year: Yup.string().required("Start year is required"),
       end_year: Yup.string().required("End year is required"),
-    })
+    }),
   ),
   certifications: Yup.array().of(
     Yup.object().shape({
       certificate_name: Yup.string().required("Certificate name is required"),
       description: Yup.string().required("Description is required"),
-    })
+    }),
   ),
 });
 
@@ -100,7 +100,7 @@ const CVForm = ({
         initialUserSkills,
         educationsToRemove,
         certificationsToRemove,
-        projectsToRemove
+        projectsToRemove,
       );
 
       const title = values.title_id
@@ -163,7 +163,7 @@ const CVForm = ({
               </Button>
 
               {errorMessage && (
-                <div className="mt-2 flex font-semibold text-red-600 justify-center text-base">
+                <div className="mt-2 flex justify-center text-base font-semibold text-red-600">
                   {errorMessage}
                 </div>
               )}

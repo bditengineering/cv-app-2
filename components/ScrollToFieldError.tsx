@@ -8,7 +8,7 @@ export const getFieldErrorNames = (formikErrors: FormikErrors<CVDetails>) => {
   const transformObjectToDotNotation = (
     obj: FormikErrors<CVDetails>,
     prefix = "",
-    result: string[] = []
+    result: string[] = [],
   ) => {
     Object.keys(obj).forEach((key) => {
       const value = obj[key as keyof typeof formikErrors];

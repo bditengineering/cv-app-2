@@ -24,7 +24,7 @@ export default function DatePicker({
   selectedDate,
 }: DatePickerProps) {
   const [date, setDate] = React.useState<Date | undefined>(
-    selectedDate ? new Date(selectedDate) : undefined
+    selectedDate ? new Date(selectedDate) : undefined,
   );
 
   return (
@@ -34,7 +34,7 @@ export default function DatePicker({
           variant="outlined"
           className={cn(
             inputVariants(),
-            "flex flex-row justify-start text-left font-normal hover:bg-slate-100"
+            "flex flex-row justify-start text-left font-normal hover:bg-slate-100",
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />

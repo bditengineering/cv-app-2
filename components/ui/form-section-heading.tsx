@@ -16,7 +16,7 @@ const headingVariants = cva(
     defaultVariants: {
       size: "sm",
     },
-  }
+  },
 );
 
 interface SectionHeadingProps

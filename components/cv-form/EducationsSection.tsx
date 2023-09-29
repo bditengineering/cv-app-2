@@ -22,12 +22,12 @@ const EducationsSection = ({
   const { values } = useFormikContext<CVDetails>();
 
   const renderEducations = (
-    remove: <X = any>(index: number) => X | undefined
+    remove: <X = any>(index: number) => X | undefined,
   ) =>
     values?.educations?.map((education, index) => (
       <div className="mt-6" key={`education-${index}`}>
         <div className="flex justify-between">
-          <h4 className="text-sky-500 mb-5">Education #{index + 1}</h4>
+          <h4 className="mb-5 text-sky-500">Education #{index + 1}</h4>
           <Button
             size="small"
             variant="outlined"
@@ -42,7 +42,7 @@ const EducationsSection = ({
             Remove
           </Button>
         </div>
-        <div className="mt-2 mb-6 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div className="mb-6 mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div className="sm:col-span-2 sm:col-start-1">
             <label
               htmlFor={`educations[${index}].university_name`}

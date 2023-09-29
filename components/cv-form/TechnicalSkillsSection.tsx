@@ -19,13 +19,13 @@ const TechnicalSkillsSection = ({ skills }: TechnicalSkillsSectionProps) => {
   const handleOnCheck = (
     event: ChangeEvent<HTMLInputElement>,
     arrayHelpers: ArrayHelpers,
-    skill: SkillWithoutGroup
+    skill: SkillWithoutGroup,
   ) => {
     if (event.target.checked) {
       arrayHelpers.push({ skill_id: skill.id });
     } else {
       const index = values?.cv_skill?.findIndex(
-        (CVSkill) => CVSkill.skill_id === skill.id
+        (CVSkill) => CVSkill.skill_id === skill.id,
       );
       if (index && index >= 0) {
         arrayHelpers.remove(index);
@@ -64,7 +64,7 @@ const TechnicalSkillsSection = ({ skills }: TechnicalSkillsSectionProps) => {
                       </Checkbox>
                     ))}
                   </TabPanel>
-                )
+                ),
               )}
             </>
           )}
