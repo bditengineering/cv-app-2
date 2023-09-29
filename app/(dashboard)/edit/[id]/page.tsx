@@ -20,14 +20,14 @@ const EditCvPage = async ({ params: { id } }: EditCvPageProps) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  const userId = session?.user.id;
+  const userId = session ? session.user.id : "";
 
   const { data } = await supabase
     .from("admins")
     .select("id")
     .eq("user_id", userId);
 
-  const isAdmin = data?.length && data.length > 0 ? true : false;
+  const isAdmin = data ? data.length > 0 : false;
 
   if (!cv) {
     throw new Error("There was an error fetching the CV");
