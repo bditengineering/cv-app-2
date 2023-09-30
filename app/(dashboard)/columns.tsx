@@ -31,7 +31,7 @@ export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
       const isCertified = row.original.is_certified;
 
       return (
-        <div className="font-medium text-gray-900 flex justify-between gap-3">
+        <div className="flex justify-between gap-3 font-medium text-gray-900">
           <span>
             {firstName} {lastName}
           </span>
