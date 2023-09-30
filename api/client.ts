@@ -14,11 +14,11 @@ import {
 function mapSkillsToUpsert(
   skills: CVSkill[],
   cvId: string,
-  initialUserSkills: Optional<CVSkill, "id">[]
+  initialUserSkills: Optional<CVSkill, "id">[],
 ) {
   return skills.map((skill) => {
     const initialSkill = initialUserSkills.find(
-      (is) => is.skill_id === skill.skill_id
+      (is) => is.skill_id === skill.skill_id,
     );
     return (
       initialSkill || { id: undefined, cv_id: cvId, skill_id: skill.skill_id }
@@ -28,12 +28,12 @@ function mapSkillsToUpsert(
 
 function findSkillsToRemove(
   initialUserSkills: CVSkill[],
-  skillsToUpsert: Optional<CVSkill, "id">[]
+  skillsToUpsert: Optional<CVSkill, "id">[],
 ) {
   const skillsToRemove: string[] = [];
   initialUserSkills.forEach((initialSkill) => {
     const skillFound = skillsToUpsert.find(
-      (skill) => skill.skill_id === initialSkill.skill_id
+      (skill) => skill.skill_id === initialSkill.skill_id,
     );
     if (!skillFound) {
       skillsToRemove.push(initialSkill.id);
@@ -45,7 +45,7 @@ function findSkillsToRemove(
 export async function upsertSkills(
   skills: CVSkill[] | undefined | null,
   cvId: string,
-  initialUserSkills: CVSkill[]
+  initialUserSkills: CVSkill[],
 ) {
   if (!skills) return;
 
@@ -84,7 +84,7 @@ export async function upsertSkills(
 export async function upsertEducation(
   educations: Education[] | undefined | null,
   cvId: string,
-  educationsToRemove: string[]
+  educationsToRemove: string[],
 ) {
   const supabase = createClientComponentClient();
 
@@ -131,7 +131,7 @@ export async function upsertEducation(
 export async function upsertCertifications(
   certifications: Certification[] | undefined | null,
   cvId: string,
-  certificationsToRemove: string[]
+  certificationsToRemove: string[],
 ) {
   const supabase = createClientComponentClient();
 
@@ -177,7 +177,7 @@ export async function upsertCertifications(
 export async function upsertProjects(
   projects: Project[] | undefined | null,
   cvId: string,
-  projectsToRemove: string[]
+  projectsToRemove: string[],
 ) {
   const supabase = createClientComponentClient();
 
@@ -235,7 +235,7 @@ export async function upsertCV(
   initialUserSkills: CVSkill[],
   educationsToRemove: string[],
   certificationsToRemove: string[],
-  projectsToRemove: string[]
+  projectsToRemove: string[],
 ) {
   const supabase = createClientComponentClient();
 
@@ -274,7 +274,7 @@ export async function upsertCV(
   await upsertCertifications(
     values.certifications,
     updatedCV.id,
-    certificationsToRemove
+    certificationsToRemove,
   );
   await upsertProjects(values.projects, updatedCV.id, projectsToRemove);
   return updatedCV.id;
@@ -294,7 +294,7 @@ async function uploadPdf(fileName: string, folderName: string) {
 export async function edgeUploadInvocation(
   values: CVDetails,
   title: string,
-  cvId: string
+  cvId: string,
 ) {
   const supabase = createClientComponentClient();
 

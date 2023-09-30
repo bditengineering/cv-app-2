@@ -23,12 +23,12 @@ const AdditionalSections = ({
   const { values } = useFormikContext<CVDetails>();
 
   const renderCertifications = (
-    remove: <X = any>(index: number) => X | undefined
+    remove: <X = any>(index: number) => X | undefined,
   ) =>
     values?.certifications?.map((certification, index) => (
-      <div className="flex flex-col w-full gap-3" key={`certificate-${index}`}>
+      <div className="flex w-full flex-col gap-3" key={`certificate-${index}`}>
         <div className="flex justify-between">
-          <h4 className="text-sky-500 mb-5">Certificate #{index + 1}</h4>
+          <h4 className="mb-5 text-sky-500">Certificate #{index + 1}</h4>
           <Button
             size="small"
             variant="outlined"
@@ -72,7 +72,7 @@ const AdditionalSections = ({
     ));
 
   const renderPersonalQualities = (
-    remove: <X = any>(index: number) => X | undefined
+    remove: <X = any>(index: number) => X | undefined,
   ) =>
     values.personal_qualities?.map((_quality, index) => (
       <Field
@@ -93,7 +93,7 @@ const AdditionalSections = ({
 
   return (
     <>
-      <div className="flex flex-wrap py-4 md:flex-nowrap mb-2">
+      <div className="mb-2 flex flex-wrap py-4 md:flex-nowrap">
         <div className="flex flex-shrink-0 md:mb-0 md:w-64">
           <span className="title-font font-semibold text-gray-700 dark:text-gray-400">
             Certifications
@@ -102,13 +102,13 @@ const AdditionalSections = ({
         <FieldArray
           name="certifications"
           render={({ push, remove }: ArrayHelpers) => (
-            <div className="flex flex-col gap-3 w-full">
+            <div className="flex w-full flex-col gap-3">
               {renderCertifications(remove)}
               <div
                 className={clsx(
                   values?.certifications?.length &&
                     values?.certifications?.length > 0 &&
-                    "ml-auto"
+                    "ml-auto",
                 )}
               >
                 <Button
@@ -137,13 +137,13 @@ const AdditionalSections = ({
         <FieldArray
           name="personal_qualities"
           render={({ push, remove }: ArrayHelpers) => (
-            <div className="flex flex-col gap-3 w-full">
+            <div className="flex w-full flex-col gap-3">
               {renderPersonalQualities(remove)}
               <div
                 className={clsx(
                   values.personal_qualities?.length &&
                     values.personal_qualities?.length > 0 &&
-                    "ml-auto"
+                    "ml-auto",
                 )}
               >
                 <Button

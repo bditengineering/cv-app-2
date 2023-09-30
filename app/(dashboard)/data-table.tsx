@@ -86,7 +86,7 @@ export function DataTable<TData, TValue>({
             table.getColumn("titles")?.setFilterValue(value);
           }}
         >
-          <SelectTrigger className="text-gray-500 w-[220px]">
+          <SelectTrigger className="w-[220px] text-gray-500">
             <SelectValue placeholder="Filter Role..." />
           </SelectTrigger>
           <SelectContent side="top">
@@ -105,7 +105,7 @@ export function DataTable<TData, TValue>({
           type="button"
           onClick={() => table.getColumn("titles")?.setFilterValue("")}
         >
-          <FilterX className="w-4 h-4" />
+          <FilterX className="h-4 w-4" />
         </Button>
       </div>
       <Table>
@@ -119,7 +119,7 @@ export function DataTable<TData, TValue>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 );

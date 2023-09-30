@@ -6,7 +6,7 @@ const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <div className="w-full my-4 border bg-white border-gray-200 rounded-xl overflow-hidden shadow-sm relative">
+  <div className="relative my-4 w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
     <table
       ref={ref}
       className={cn("w-full border-0", className)}
@@ -24,8 +24,8 @@ const TableHeader = React.forwardRef<
   <thead
     ref={ref}
     className={cn(
-      "w-full border-0 bg-gray-50 text-gray-600 font-normal",
-      className
+      "w-full border-0 bg-gray-50 font-normal text-gray-600",
+      className,
     )}
     {...props}
   />
@@ -50,7 +50,7 @@ const TableFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tfoot
     ref={ref}
-    className={cn("bg-primary font-medium text-primary-foreground", className)}
+    className={cn("bg-primary text-primary-foreground font-medium", className)}
     {...props}
   />
 ));
@@ -76,7 +76,7 @@ const TableHead = React.forwardRef<
     ref={ref}
     className={cn(
       "h-10 px-6 text-left align-middle font-normal [&:has([role=checkbox])]:pr-0",
-      className
+      className,
     )}
     {...props}
   />
@@ -90,8 +90,8 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "px-6 border-0 text-gray-600 leading-normal py-4 text-base text-left",
-      className
+      "border-0 px-6 py-4 text-left text-base leading-normal text-gray-600",
+      className,
     )}
     {...props}
   />
@@ -104,7 +104,7 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn("mt-4 text-sm text-muted-foreground", className)}
+    className={cn("text-muted-foreground mt-4 text-sm", className)}
     {...props}
   />
 ));

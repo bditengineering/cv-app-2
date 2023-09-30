@@ -14,8 +14,8 @@ const RemoveInputAction = ({ disabled, onClick }: RemoveInputActionProps) => (
     className={cn([
       // add left border and remove radius
       // + add 1px margin (width of border) so container's border is not overlapped on hover and focus
-      "px-4 py-2 rounded-l-none border-l border-l-gray-300",
-      "focus:m-0 focus:border focus:border-indigo-300 focus:ring-4 focus:ring-indigo-100 hover:bg-inherit",
+      "rounded-l-none border-l border-l-gray-300 px-4 py-2",
+      "hover:bg-inherit focus:m-0 focus:border focus:border-indigo-300 focus:ring-4 focus:ring-indigo-100",
     ])}
     disabled={disabled}
     onClick={onClick}
