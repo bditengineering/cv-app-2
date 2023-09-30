@@ -5,7 +5,9 @@ import { createClientComponentClient } from "@/lib/supabase-client";
 import { CVWithTitlesAndUser } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { ChevronsUpDown } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import certifiedPic from "/public/certified.png";
 
 export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
   {
@@ -26,9 +28,24 @@ export const columns: ColumnDef<CVWithTitlesAndUser>[] = [
     cell: ({ row }) => {
       const firstName = row.original.first_name;
       const lastName = row.original.last_name;
+      const isCertified = row.original.is_certified;
 
       return (
-        <div className="font-medium text-gray-900">{`${firstName} ${lastName}`}</div>
+        <div className="font-medium text-gray-900 flex justify-between gap-3">
+          <span>
+            {firstName} {lastName}
+          </span>
+          {isCertified && (
+            <div className="flex shrink-0 items-center">
+              <Image
+                alt="BDIT certified logo"
+                className="h-fit"
+                src={certifiedPic}
+                width={80}
+              />
+            </div>
+          )}
+        </div>
       );
     },
   },

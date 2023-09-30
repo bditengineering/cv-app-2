@@ -6,9 +6,13 @@ import { TitlesResponse } from "@/types";
 
 interface PersonalDetailsSectionProps {
   titles: TitlesResponse[];
+  isAdmin: boolean;
 }
 
-const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {
+const PersonalDetailsSection = ({
+  titles,
+  isAdmin,
+}: PersonalDetailsSectionProps) => {
   return (
     <>
       <div className="flex flex-wrap py-4 md:flex-nowrap">
@@ -70,6 +74,32 @@ const PersonalDetailsSection = ({ titles }: PersonalDetailsSectionProps) => {
           </div>
         </div>
       </div>
+
+      {isAdmin && (
+        <div className="flex flex-wrap py-4 md:flex-nowrap">
+          <div className="flex flex-shrink-0 flex-col md:mb-0 md:w-64">
+            <span className="title-font font-semibold text-gray-700 dark:text-gray-400">
+              BDIT Certified Engineer
+            </span>
+          </div>
+          <div className="md:flex-grow">
+            <div className="inline-block">
+              <div>
+                <Field
+                  className="text-primary-light"
+                  name="is_certified"
+                  type="checkbox"
+                />
+              </div>
+              <ErrorMessage
+                className="w-full text-red-600"
+                name="is_certified"
+                component="span"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-wrap py-4 md:flex-nowrap">
         <div className="flex flex-shrink-0 flex-col md:mb-0 md:w-64">
